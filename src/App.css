@@ -1,10 +1,29 @@
+/* General App Layout */
 .App {
   text-align: center;
+  background: linear-gradient(135deg, #0f172a, #1e3a8a); /* deep navy to indigo */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  color: #e2e8f0; /* soft gray-blue text */
+  padding: 2rem;
+  transition: background 0.6s ease;
 }
 
+/* Logo Animation */
 .App-logo {
-  height: 40vmin;
+  height: 120px;
   pointer-events: none;
+  filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.4));
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+
+.App-logo:hover {
+  transform: scale(1.12) rotate(6deg);
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6));
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -13,21 +32,38 @@
   }
 }
 
+/* Header Styling */
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background: rgba(255, 255, 255, 0.08); /* glassy effect */
+  backdrop-filter: blur(16px) saturate(120%);
+  border-radius: 24px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  color: #f1f5f9; /* light text for contrast */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.App-header:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Links */
 .App-link {
-  color: #61dafb;
+  color: #38bdf8; /* cyan accent */
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
 }
 
+.App-link:hover {
+  color: #0ea5e9;
+  text-decoration: underline;
+  text-shadow: 0 0 8px rgba(56, 189, 248, 0.6);
+}
+
+/* Animation Keyframes */
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
