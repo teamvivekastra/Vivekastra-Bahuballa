@@ -1,0 +1,367 @@
+/* General App Layout */
+.App {
+  text-align: center;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%),
+    linear-gradient(135deg, #000000 0%, #1e1b4b 50%, #000000 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: "Orbitron", "Poppins", sans-serif;
+  color: #e2e8f0;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Background Elements */
+.App::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(1px 1px at 20% 30%, rgba(168, 85, 247, 0.4) 50%, transparent 50%),
+    radial-gradient(1px 1px at 40% 70%, rgba(139, 92, 246, 0.3) 50%, transparent 50%),
+    radial-gradient(1px 1px at 60% 20%, rgba(147, 51, 234, 0.4) 50%, transparent 50%),
+    radial-gradient(1px 1px at 80% 50%, rgba(192, 132, 252, 0.3) 50%, transparent 50%);
+  background-size: 200px 200px;
+  animation: float 20s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes float {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-200px) translateX(200px); }
+}
+
+ /* Line 47 is now empty or contains the next valid line of code */
+
+.cricket-popup {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  background: rgba(168, 85, 247, 0.1);
+  border-radius: 50%;
+  border: 2px solid rgba(192, 132, 252, 0.3);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 
+    0 0 30px rgba(168, 85, 247, 0.4),
+    inset 0 0 20px rgba(192, 132, 252, 0.2);
+  animation: popup-float 3s ease-in-out infinite;
+  transform-style: preserve-3d; /* Enable 3D perspective */
+}
+
+@keyframes popup-float {
+  0%, 100% { transform: translateY(0px) rotateX(5deg); }
+  50% { transform: translateY(-10px) rotateX(-5deg); }
+}
+
+/* Cricket Ball - Animated trajectory */
+.popup-ball {
+  position: absolute;
+  width: 20px; /* Slightly smaller */
+  height: 20px;
+  background: linear-gradient(135deg, #ff4500, #ff8c00); /* Deep Orange/Red */
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px rgba(255, 69, 0, 0.9),
+    inset 0 0 5px rgba(255, 255, 255, 0.5);
+  z-index: 20;
+  animation: ball-trajectory 4s cubic-bezier(0.68, -0.55, 0.26, 1.55) infinite; /* New, more dynamic animation */
+}
+
+@keyframes ball-trajectory {
+  0% { top: 10px; left: 10px; transform: scale(1) rotate(0deg); } /* Start: Back and high */
+  25% { top: 70px; left: 60px; transform: scale(1.1) rotate(90deg); } /* Contact point */
+  50% { top: 10px; left: 90px; transform: scale(1.2) rotate(180deg); } /* Flight: High and far */
+  75% { top: 70px; left: 60px; transform: scale(1.1) rotate(270deg); } /* Return bounce */
+  100% { top: 10px; left: 10px; transform: scale(1) rotate(360deg); }
+}
+
+/* Cricket Bat - More realistic shape and 3D swing */
+.popup-bat {
+  position: absolute;
+  width: 15px; /* Wider */
+  height: 60px; /* Longer */
+  background: linear-gradient(90deg, #a0522d, #deb887); /* Wooden look */
+  border-radius: 4px;
+  transform-origin: 50% 100%; /* Pivot point at the handle end */
+  box-shadow: 0 0 15px rgba(160, 82, 45, 0.7);
+  z-index: 15;
+  bottom: 0;
+  right: 30px;
+  animation: bat-swing 4s ease-in-out infinite; /* New swing animation */
+}
+
+/* Handle of the bat */
+.popup-bat::before {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 20px;
+  background: #363636; /* Black/Dark Grey handle */
+  border-radius: 4px;
+  box-shadow: 0 -5px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Blade of the bat (simplified) */
+.popup-bat::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 10px;
+  background: #deb887;
+  border-radius: 4px;
+}
+
+@keyframes bat-swing {
+  0% { transform: rotateZ(-40deg) rotateX(10deg); }
+  25% { transform: rotateZ(30deg) rotateX(0deg) scaleY(1.05); } /* Hitting point */
+  50% { transform: rotateZ(-50deg) rotateX(10deg); }
+  75% { transform: rotateZ(30deg) rotateX(0deg) scaleY(1.05); }
+  100% { transform: rotateZ(-40deg) rotateX(10deg); }
+}
+
+/* Cricket Stumps - More visual interest */
+.popup-stumps {
+  position: absolute;
+  width: 15px;
+  height: 35px;
+  background: none; /* Container for the three stumps */
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.popup-stumps::before {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to top, #6b46c1, #a855f7); /* Purple stumps */
+  left: 0;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+  animation: stumps-wobble 1s ease-in-out infinite alternate;
+}
+
+.popup-stumps::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 100%;
+  background: none; /* Middle and Right Stump Container */
+  left: 3px;
+}
+
+/* Middle Stump */
+.popup-stumps::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to top, #6b46c1, #a855f7);
+  left: 3px;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+  animation: stumps-wobble 1s ease-in-out infinite alternate 0.2s;
+}
+
+/* Right Stump */
+.popup-stumps::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to top, #6b46c1, #a855f7);
+  left: 9px;
+  box-shadow: 0 0 10px rgba(168, 85, 247, 0.8);
+  animation: stumps-wobble 1s ease-in-out infinite alternate 0.4s;
+}
+
+@keyframes stumps-wobble {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(1deg); }
+}
+
+/* Glow Effect */
+.popup-glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    rgba(168, 85, 247, 0.3),
+    rgba(192, 132, 252, 0.2),
+    rgba(139, 92, 246, 0.3),
+    transparent
+  );
+  animation: rotate-glow 4s linear infinite;
+  filter: blur(8px);
+  z-index: -1;
+}
+
+@keyframes rotate-glow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ---------------------------------------------------------------------- */
+/* END OF ENHANCED CRICKET ANIMATION STYLES */
+/* ---------------------------------------------------------------------- */
+
+
+/* Enhanced Logo Animation */
+.App-logo {
+  height: 140px;
+  pointer-events: none;
+  filter: 
+    drop-shadow(0 0 20px rgba(168, 85, 247, 0.6))
+    drop-shadow(0 0 40px rgba(139, 92, 246, 0.4));
+  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  z-index: 2;
+}
+
+.App-logo:hover {
+  transform: scale(1.15) rotate(8deg);
+  filter: 
+    drop-shadow(0 0 30px rgba(192, 132, 252, 0.8))
+    drop-shadow(0 0 60px rgba(168, 85, 247, 0.5));
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 25s linear;
+  }
+}
+
+/* Premium Header Styling */
+.App-header {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(168, 85, 247, 0.2);
+  border-radius: 28px;
+  padding: 3.5rem 3rem;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 30px rgba(139, 92, 246, 0.3);
+  max-width: 850px;
+  width: 90%;
+  color: #f1f5f9;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+}
+
+.App-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(168, 85, 247, 0.1),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.App-header:hover::before {
+  left: 100%;
+}
+
+.App-header:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 35px 70px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 50px rgba(139, 92, 246, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(192, 132, 252, 0.3);
+}
+
+/* Enhanced Links with Purple Gradient */
+.App-link {
+  background: linear-gradient(135deg, #a855f7 0%, #c084fc 50%, #a855f7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.2rem 0.5rem;
+  border-radius: 8px;
+}
+
+.App-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(135deg, #a855f7, #c084fc);
+  transition: width 0.3s ease;
+}
+
+.App-link:hover::after {
+  width: 100%;
+}
+
+.App-link:hover {
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Enhanced Animation Keyframes */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Additional Purple Theme Utilities */
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(168, 85, 247, 0.15);
+  border-radius: 24px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(192, 132, 252, 0.3);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(139, 92, 246, 0.2);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #7c3aed 0%, #a855f7);
+}

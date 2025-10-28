@@ -1,0 +1,24 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@layer components {
+  .glass-card {
+    @apply bg-[#101b3b]/80 backdrop-blur-xl rounded-2xl shadow-lg border border-cyan-400/20;
+  }
+  .btn-primary {
+    @apply bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-blue-400 hover:to-indigo-600 
+           text-white font-bold py-3 px-6 rounded-xl shadow-lg shadow-cyan-500/40 hover:shadow-cyan-500/70 
+           transition transform hover:scale-105;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 rounded-lg bg-[#0c1021] border border-cyan-400/30 
+           focus:outline-none focus:ring-2 focus:ring-cyan-500 text-gray-200;
+  }
+  .section-heading {
+    @apply text-3xl font-bold text-center mb-8 drop-shadow;
+  }
+  .section-text {
+    @apply text-gray-300 leading-relaxed text-lg;
+  }
+}
